@@ -8,8 +8,9 @@ body {
 }
 
 .root {
-    width: calc(100vw + 200px);
-    height: calc(100vh + 200px);
+    width: calc(120vw);
+    height: calc(100vh + 100px);
+    min-width: 1500px;
     position: relative;
     cursor: crosshair;
     overflow: hidden;
@@ -24,29 +25,32 @@ body {
     }
 }
 
-.before-hover {
+.img-hover {
     position: absolute;
     transform: scale(0.2);
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
+
+    &.before-hover {
+        opacity: 0;
+    }
 
     &.start01 {
         top: calc(30% - 50px);
-        left: calc(50vw - 50px);
-
+        left: calc(30vw - 50px);
     }
 
     &.start02 {
-        top: calc(30% + 50px);
-        left: calc(50vw + 50px);
+        top: calc(30%);
+        left: calc(30vw + 50px);
     }
 
     &.start03 {
-        top: calc(30% - 150px);
-        left: calc(50vw - 200px);
+        top: calc(30% + 50px);
+        left: calc(30vw - 100px);
     }
 
     &.start04 {
-        top: calc(30% + 50px);
-        left: calc(50vw - 150px);
+        top: calc(30% + 10px);
+        left: calc(30vw - 10px);
     }
 }

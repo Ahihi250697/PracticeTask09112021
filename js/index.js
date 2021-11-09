@@ -6,7 +6,6 @@ const RootTitle = $(".root-title");
 const RootWidth = Root.innerWidth();
 const RootHeight = Root.innerHeight();
 const DefaultDistance = 300;
-const DefaultScaleMin = 0.2;
 
 // fetch img
 const imgFetch = () => {
@@ -140,7 +139,7 @@ const imgFetch = () => {
     _data.map((val, ind) => {
         let _left = Math.random() * RootWidth - 100,
             _top = Math.random() * RootHeight - 100;
-        _html += `<img class="before-hover js-img-hover" style="left:${_left}px; top:${_top}px" src="${val.src}" alt="${val.alt}"></img>
+        _html += `<img class="img-hover before-hover js-img-hover" style="left:${_left}px; top:${_top}px" src="${val.src}" alt="${val.alt}"></img>
         `;
     });
     Root.append(_html);
@@ -149,7 +148,7 @@ imgFetch();
 const ImgLists = $(".js-img-hover");
 
 // init
-const imgInit = (imgLists) => {
+const imgInit = () => {
     ImgLists.map((ind, val) => {
         let _ = $(val),
             _x = _.position().left,
@@ -157,7 +156,7 @@ const imgInit = (imgLists) => {
             _w = _.get(0).getBoundingClientRect().width,
             _h = _.get(0).getBoundingClientRect().height,
             _s = _.get(0).getBoundingClientRect().width / _.get(0).offsetWidth;
-
+        _.removeClass("before-hover");
         const Pos = {
             x: _x + _w * 0.5,
             y: _y + _h * 0.5,
@@ -215,11 +214,21 @@ const getHoverHandle = (ele, pagePos, imgLists) => {
         let _d2 = 1 - Check / DefaultDistance;
         _d2 <= 0.2 ? (_d2 = 0.2) : _d2;
 
-        let _zindex = Math.floor(_d2 * 50);
+        let _zindex = Math.floor(_d2 * 100);
+
         $(val).css({
             transform: `scale(${_d2})`,
-            "z-index": _zindex,
+            // "z-index": _zindex,
         });
+        if (_zindex > 50) {
+            $(val).css({
+                "z-index": _zindex,
+            });
+        } else {
+            $(val).css({
+                "z-index": 1,
+            });
+        }
     });
 };
 
@@ -260,20 +269,23 @@ const RootMove = (pos, mouse) => {
 //load
 $(window).on("load", function () {
     //const ImgLists = $(".js-img-hover");
-    imgInit();
-    ImgLists.on("mouseenter", function () {
-        let _title = $(this).attr("alt");
-        RootTitle.text(_title);
-    });
 
     let _mousemove = false;
+    let _time = setTimeout(function () {
+        _mousemove = true;
+        imgInit();
+        ImgLists.on("mouseenter", function () {
+            let _title = $(this).attr("alt");
+            RootTitle.text(_title);
+        });
+    }, 1000);
     Root.on("mouseenter mousemove", function (e) {
         if (_mousemove) {
             const _ = $(this);
             const ThisPos = { x: _.offset().left, y: _.offset().top };
             const PagePos = { x: e.pageX, y: e.pageY };
             getHoverHandle(ThisPos, PagePos, ImgLists);
-        } else {
+            _mousemove = false;
             let _time = setTimeout(function () {
                 _mousemove = true;
             }, 100);

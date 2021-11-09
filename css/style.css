@@ -8,8 +8,9 @@ body {
 }
 
 .root {
-  width: calc(100vw + 200px);
-  height: calc(100vh + 200px);
+  width: 120vw;
+  height: calc(100vh + 100px);
+  min-width: 1500px;
   position: relative;
   cursor: crosshair;
   overflow: hidden;
@@ -23,26 +24,29 @@ body {
   z-index: 9999;
 }
 
-.before-hover {
+.img-hover {
   position: absolute;
   transform: scale(0.2);
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
-.before-hover.start01 {
+.img-hover.before-hover {
+  opacity: 0;
+}
+.img-hover.start01 {
   top: calc(30% - 50px);
-  left: calc(50vw - 50px);
+  left: calc(30vw - 50px);
 }
-.before-hover.start02 {
+.img-hover.start02 {
+  top: 30%;
+  left: calc(30vw + 50px);
+}
+.img-hover.start03 {
   top: calc(30% + 50px);
-  left: calc(50vw + 50px);
+  left: calc(30vw - 100px);
 }
-.before-hover.start03 {
-  top: calc(30% - 150px);
-  left: calc(50vw - 200px);
-}
-.before-hover.start04 {
-  top: calc(30% + 50px);
-  left: calc(50vw - 150px);
+.img-hover.start04 {
+  top: calc(30% + 10px);
+  left: calc(30vw - 10px);
 }
 
 /*# sourceMappingURL=style.css.map */
