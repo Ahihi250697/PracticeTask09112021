@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-y: scroll;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    font-size: 62.5%;
+}
+
+body {
+    line-height: 1.15;
+    background: #fff;
+    color: #333;
+    word-wrap: break-word;
+    font-size: 1.6rem;
+}
+
+
+ul {
+    list-style: none;
+}
+
+ol {
+    list-style: decimal inside;
+}
+
+
+
+img {
+    display: block;
+}
+
+p {
+    line-height: 1.6;
+}
+
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}

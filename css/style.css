@@ -1,0 +1,44 @@
+body {
+  overflow-x: hidden;
+}
+
+.over-scroll {
+  overflow: hidden;
+  height: 600px;
+  margin-top: 100px;
+  border: 1px solid;
+}
+
+.root {
+  width: 1500px;
+  height: 800px;
+  position: relative;
+  cursor: crosshair;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: all 1s linear;
+}
+
+.before-hover {
+  position: absolute;
+  transform: scale(0.2);
+  transition: all 0.6s ease;
+}
+.before-hover.start01 {
+  top: calc(30% - 50px);
+  left: calc(50vw - 50px);
+}
+.before-hover.start02 {
+  top: calc(30% + 50px);
+  left: calc(50vw + 50px);
+}
+.before-hover.start03 {
+  top: calc(30% - 150px);
+  left: calc(50vw - 200px);
+}
+.before-hover.start04 {
+  top: calc(30% + 50px);
+  left: calc(50vw - 150px);
+}
+
+/*# sourceMappingURL=style.css.map */
