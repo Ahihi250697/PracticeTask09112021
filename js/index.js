@@ -1,9 +1,11 @@
+//const
 const WindowWidth = $(window).width();
 const RootOuterHeight = $(".js-root-outer").innerHeight();
 const Root = $(".root");
+const RootTitle = $(".root-title");
 const RootWidth = Root.innerWidth();
 const RootHeight = Root.innerHeight();
-const DefaultDistance = 250;
+const DefaultDistance = 300;
 const DefaultScaleMin = 0.2;
 
 // fetch img
@@ -49,20 +51,106 @@ const imgFetch = () => {
             src: "./images/orange.jpg",
             alt: "image 0 10",
         },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 1",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 1",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 2",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 3",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 4",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 5",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 6",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 7",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 8",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 9",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 10",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 1",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 2",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 3",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 4",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 5",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 6",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 7",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 8",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 9",
+        },
+        {
+            src: "./images/orange.jpg",
+            alt: "image 0 10",
+        },
     ];
     let _html = "";
     _data.map((val, ind) => {
-        let _left = Math.random() * (RootWidth - 100) - 100,
-            _top = Math.random() * (RootHeight - 100) - 100;
-        _html += `<img class="before-hover js-img-hover" style="left:${_left}px; top:${_top}px" src="./images/orange.jpg" alt="image"></img>
+        let _left = Math.random() * RootWidth - 100,
+            _top = Math.random() * RootHeight - 100;
+        _html += `<img class="before-hover js-img-hover" style="left:${_left}px; top:${_top}px" src="${val.src}" alt="${val.alt}"></img>
         `;
     });
     Root.append(_html);
 };
+imgFetch();
+const ImgLists = $(".js-img-hover");
 
 // init
 const imgInit = (imgLists) => {
-    imgLists.map((ind, val) => {
+    ImgLists.map((ind, val) => {
         let _ = $(val),
             _x = _.position().left,
             _y = _.position().top,
@@ -116,18 +204,18 @@ const getCollision = (mouse, img) => {
 const getHoverHandle = (ele, pagePos, imgLists) => {
     const MousePos = getMousePos(ele, pagePos);
 
-    imgLists.map((ind, val) => {
+    ImgLists.map((ind, val) => {
         const ImgPos = getImgPos($(val));
         const Check = getCollision(MousePos, ImgPos);
-        const ImgScale = $(val).data("img").s;
+        // const ImgScale = $(val).data("img").s;
         if (Check < DefaultDistance) {
             // RootMove(pagePos);
-            RootMove(ImgPos);
+            RootMove(ImgPos, MousePos);
         }
         let _d2 = 1 - Check / DefaultDistance;
-        _d2 <= ImgScale ? (_d2 = ImgScale) : _d2;
+        _d2 <= 0.2 ? (_d2 = 0.2) : _d2;
 
-        let _zindex = Math.floor(_d2 * 1000);
+        let _zindex = Math.floor(_d2 * 50);
         $(val).css({
             transform: `scale(${_d2})`,
             "z-index": _zindex,
@@ -147,7 +235,7 @@ const resetImg = () => {
 };
 
 // root move
-const RootMove = (pos) => {
+const RootMove = (pos, mouse) => {
     let _rootHalf = RootWidth - WindowWidth;
 
     let _left = pos.x - WindowWidth * 0.5,
@@ -160,15 +248,23 @@ const RootMove = (pos) => {
         ? (_top = RootOuterHeight - RootHeight)
         : _top;
 
+    RootTitle.css({
+        top: `${mouse.y}px`,
+        left: `${mouse.x}px`,
+    });
     Root.css({
         transform: `translate(${-_left}px, ${_top}px)`,
     });
 };
+
+//load
 $(window).on("load", function () {
-    //IMG_HOVER_INIT();
-    imgFetch();
-    const ImgLists = $(".js-img-hover");
-    imgInit(ImgLists);
+    //const ImgLists = $(".js-img-hover");
+    imgInit();
+    ImgLists.on("mouseenter", function () {
+        let _title = $(this).attr("alt");
+        RootTitle.text(_title);
+    });
 
     let _mousemove = false;
     Root.on("mouseenter mousemove", function (e) {
@@ -180,7 +276,7 @@ $(window).on("load", function () {
         } else {
             let _time = setTimeout(function () {
                 _mousemove = true;
-            }, 200);
+            }, 100);
         }
         _mousemove = false;
     }).on("mouseleave", function () {
