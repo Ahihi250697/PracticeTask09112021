@@ -22,6 +22,7 @@ body {
   color: #fff;
   transform: translate(-50%, 20px);
   z-index: 9999;
+  transition: all 0.2s ease;
 }
 
 .img-hover {
