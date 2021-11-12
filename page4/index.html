@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../assets/css/reset.css" rel="stylesheet">
+    <link href="../css/page.css" rel="stylesheet">
+    <title>page 1</title>
+    <script src="../assets/js/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+    <div class="page">
+        <!--- #region: img start --->
+        <span class="img-order">
+            0/0
+        </span>
+        <script>
+            const ImgName = localStorage.imgName;
+            console.log(localStorage);
+            document.write(`<figure class="img img-start">
+                    <img src="./image/${ImgName}" alt="image">
+                </figure>
+             `);
+            setTimeout(function () {
+                $(".img-start").removeClass("img-start")
+            }, 500);
+        </script>
+        <!--- #endregion: img start --->
+
+        <!--- #region: img children --->
+        <figure class="img img-children start">
+            <img src="./image/img_01.jpg" alt="image">
+        </figure>
+        <figure class="img img-children start">
+            <img src="./image/img_02.jpg" alt="image">
+        </figure>
+        <figure class="img img-children start">
+            <img src="./image/img_03.jpg" alt="image">
+        </figure>
+        <figure class="img img-children start">
+            <img src="./image/img_04.jpg" alt="image">
+        </figure>
+        <figure class="img img-children start">
+            <img src="./image/img_05.jpg" alt="image">
+        </figure>
+        <!--- #endregion: img children --->
+
+        <!--- #region: next page --->
+        <figure class="img start" data-nav="page5">
+            <img src="../page5/image/img_01.jpg" alt="image">
+            <figcaption class="img-title">
+                Conan
+            </figcaption>
+        </figure>
+        <!--- #endregion: next page --->
+    </div>
+    <script src="../js/page.js" type="module"></script>
+</body>
+
+</html>

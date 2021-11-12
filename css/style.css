@@ -1,53 +1,393 @@
 body {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 .over-scroll {
-  overflow: hidden;
-  height: 100vh;
+    overflow: hidden;
+    height: 100vh;
 }
 
 .root {
-  width: 120vw;
-  height: calc(100vh + 100px);
-  min-width: 1500px;
-  position: relative;
-  cursor: crosshair;
-  overflow: hidden;
-  transition: all 0.5s ease;
+    width: calc(100% + 100px);
+    height: calc(100% + 100px);
+    position: relative;
+    cursor: crosshair;
+    overflow: hidden;
+    transform: translate(-50px, -50px);
+    transition: all 1s ease;
+    border: 2px solid green;
 }
+
 .root .root-title {
-  position: fixed;
-  font-size: 2rem;
-  color: #fff;
-  transform: translate(-50%, 20px);
-  z-index: 9999;
-  transition: all 0.2s ease;
+    position: fixed;
+    min-width: 100px;
+    text-align: center;
+    font-size: 1.8rem;
+    color: #fff;
+    transform: translate(-50%, 20px);
+    z-index: 9999;
+    transition: all 0.1s ease;
+}
+
+.root .img-title {
+    display: none;
 }
 
 .img-hover {
-  position: absolute;
-  transform: scale(0.2);
-  transition: all 0.5s ease;
-}
-.img-hover.before-hover {
-  opacity: 0;
-}
-.img-hover.start01 {
-  top: calc(30% - 50px);
-  left: calc(30vw - 50px);
-}
-.img-hover.start02 {
-  top: 30%;
-  left: calc(30vw + 50px);
-}
-.img-hover.start03 {
-  top: calc(30% + 50px);
-  left: calc(30vw - 100px);
-}
-.img-hover.start04 {
-  top: calc(30% + 10px);
-  left: calc(30vw - 10px);
+    width: 100%;
+    max-width: 600px;
+    max-height: 600px;
+    position: absolute;
+    transform-origin: top left;
+    transform: scale(0.3);
+    transition: all 0.5s ease;
 }
 
-/*# sourceMappingURL=style.css.map */
+@media only screen and (max-width: 1280px) {
+    .img-hover {
+        max-width: 500px;
+        max-height: 500px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .img-hover {
+        max-width: 400px;
+        max-height: 400px;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .img-hover {
+        max-width: 300px;
+        max-height: 300px;
+    }
+}
+
+.img-hover img {
+    border: 1px solid #333;
+    width: 100%;
+    transform: translate(-50%, -50%);
+}
+
+.img-hover.img-init {
+    opacity: 0;
+}
+
+.img-hover.img-click {
+    transition: all 0.5s ease 0.5s;
+    z-index: 9000;
+    transform: scale(0.3) !important;
+}
+
+.img-hover.img6 {
+    left: 29%;
+    top: 21.6%;
+    z-index: 6;
+}
+
+.img-hover.img7 {
+    left: 50%;
+    top: 14.4%;
+    z-index: 7;
+}
+
+.img-hover.img8 {
+    left: 71%;
+    top: 72%;
+    z-index: 8;
+}
+
+.img-hover.img9 {
+    left: 92%;
+    top: 64.8%;
+    z-index: 9;
+}
+
+.img-hover.img10 {
+    left: 8%;
+    top: 57.6%;
+    z-index: 10;
+}
+
+.img-hover.img11 {
+    left: 6.5%;
+    top: 18%;
+}
+
+.img-hover.img12 {
+    left: 78%;
+    top: 72%;
+}
+
+.img-hover.img13 {
+    left: 52%;
+    top: 30%;
+}
+
+.img-hover.img14 {
+    left: 26%;
+    top: 84%;
+}
+
+.img-hover.img15 {
+    left: 97.5%;
+    top: 42%;
+}
+
+.img-hover.img16 {
+    left: 43.2%;
+    top: 44.8%;
+}
+
+.img-hover.img17 {
+    left: 14.4%;
+    top: 33.6%;
+}
+
+.img-hover.img18 {
+    left: 86.4%;
+    top: 22.4%;
+}
+
+.img-hover.img19 {
+    left: 57.6%;
+    top: 11.2%;
+}
+
+.img-hover.img20 {
+    left: 28.8%;
+    top: 56%;
+}
+
+.img-hover.img21 {
+    left: 84%;
+    top: 59.5%;
+}
+
+.img-hover.img22 {
+    left: 48%;
+    top: 49%;
+}
+
+.img-hover.img23 {
+    left: 12%;
+    top: 38.5%;
+}
+
+.img-hover.img24 {
+    left: 96%;
+    top: 28%;
+}
+
+.img-hover.img25 {
+    left: 60%;
+    top: 87.5%;
+}
+
+@media only screen and (max-width: 767px) {
+    .img-hover.img6 {
+        left: 29%;
+        top: 21.6%;
+        z-index: 6;
+    }
+
+    .img-hover.img7 {
+        left: 50%;
+        top: 14.4%;
+        z-index: 7;
+    }
+
+    .img-hover.img8 {
+        left: 71%;
+        top: 72%;
+        z-index: 8;
+    }
+
+    .img-hover.img9 {
+        left: 92%;
+        top: 64.8%;
+        z-index: 9;
+    }
+
+    .img-hover.img10 {
+        left: 8%;
+        top: 57.6%;
+        z-index: 10;
+    }
+
+    .img-hover.img11 {
+        left: 5%;
+        top: 18%;
+    }
+
+    .img-hover.img12 {
+        left: 60%;
+        top: 72%;
+    }
+
+    .img-hover.img13 {
+        left: 40%;
+        top: 30%;
+    }
+
+    .img-hover.img14 {
+        left: 20%;
+        top: 84%;
+    }
+
+    .img-hover.img15 {
+        left: 75%;
+        top: 42%;
+    }
+
+    .img-hover.img16 {
+        left: 43.2%;
+        top: 72%;
+    }
+
+    .img-hover.img17 {
+        left: 14.4%;
+        top: 54%;
+    }
+
+    .img-hover.img18 {
+        left: 86.4%;
+        top: 36%;
+    }
+
+    .img-hover.img19 {
+        left: 57.6%;
+        top: 18%;
+    }
+
+    .img-hover.img20 {
+        left: 28.8%;
+        top: 90%;
+    }
+
+    .img-hover.img21 {
+        left: 84%;
+        top: 59.5%;
+    }
+
+    .img-hover.img22 {
+        left: 48%;
+        top: 49%;
+    }
+
+    .img-hover.img23 {
+        left: 12%;
+        top: 38.5%;
+    }
+
+    .img-hover.img24 {
+        left: 96%;
+        top: 28%;
+    }
+
+    .img-hover.img25 {
+        left: 60%;
+        top: 87.5%;
+    }
+}
+
+.img-start.img1,
+.img-start.img2,
+.img-start.img3,
+.img-start.img4,
+.img-start.img5 {
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+}
+
+.img-start.img1 {
+    animation: kf_img01 2s ease 0.5s 1 both;
+}
+
+.img-start.img2 {
+    animation: kf_img02 2s ease 0.4s 1 both;
+}
+
+.img-start.img3 {
+    animation: kf_img03 2s ease 0.3s 1 both;
+}
+
+.img-start.img4 {
+    animation: kf_img04 2s ease 0.2s 1 both;
+}
+
+.img-start.img5 {
+    animation: kf_img05 2s ease 0.1s 1 both;
+}
+
+@keyframes kf_img01 {
+
+    30%,
+    80% {
+        top: 52.5%;
+        left: 47.5%;
+    }
+
+    100% {
+        top: 60.5%;
+        left: 40.5%;
+    }
+}
+
+@keyframes kf_img02 {
+
+    30%,
+    65% {
+        top: 48%;
+        left: 48.5%;
+    }
+
+    100% {
+        top: 30.5%;
+        left: 42.5%;
+    }
+}
+
+@keyframes kf_img03 {
+
+    30%,
+    65% {
+        top: 49%;
+        left: 52%;
+    }
+
+    100% {
+        top: 44.5%;
+        left: 65.5%;
+    }
+}
+
+@keyframes kf_img04 {
+
+    30%,
+    65% {
+        top: 51%;
+        left: 50.5%;
+    }
+
+    100% {
+        top: 65.5%;
+        left: 55.5%;
+    }
+}
+
+@keyframes kf_img05 {
+
+    30%,
+    65% {
+        top: 46%;
+        left: 50.5%;
+    }
+
+    100% {
+        top: 22.5%;
+        left: 70%;
+    }
+}

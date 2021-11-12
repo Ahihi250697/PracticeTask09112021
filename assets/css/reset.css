@@ -32,7 +32,9 @@ ol {
     list-style: decimal inside;
 }
 
-
+figure img {
+    width: 100%;
+}
 
 img {
     display: block;
