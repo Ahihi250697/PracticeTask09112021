@@ -65,7 +65,6 @@ body {
 }
 
 .img-hover img {
-    border: 1px solid #333;
     width: 100%;
     transform: translate(-50%, -50%);
 }

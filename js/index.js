@@ -1,5 +1,3 @@
-import * as App from "./App.js";
-
 //const
 const WindowWidth = $(window).width();
 const RootOuterHeight = $(".js-root-outer").innerHeight();
@@ -11,7 +9,7 @@ const DefaultDistance = 400;
 const ImgLists = $(".js-img-hover");
 
 // fetch img
-const imgFetch = () => {
+const img_fetch = () => {
     /*
     let _data = [
         {
@@ -37,10 +35,10 @@ const imgFetch = () => {
         if (ind >= 25) _.remove();
     });
 };
-imgFetch();
+img_fetch();
 
 // init
-const imgInit = () => {
+const img_init = () => {
     ImgLists.map((ind, val) => {
         let _ = $(val),
             _x = _.position().left,
@@ -59,41 +57,64 @@ const imgInit = () => {
     });
     console.log("init");
 };
+// mouse position
+const mouse = (ele, pagePos) => {
+    let _x = pagePos.x - ele.x,
+        _y = pagePos.y - ele.y;
+
+    return {
+        x: _x,
+        y: _y,
+    };
+};
+
+// absolute title
+const absolute_title = (c, pos) => {
+    c.css({
+        top: `${pos.y}px`,
+        left: `${pos.x}px`,
+    });
+};
 
 // get img position
-const getImgPos = (e) => {
+const image_position = (e) => {
     let _data = e.data("img");
     return { x: _data.x, y: _data.y };
 };
+// distance A(x1, y1) B(x2, y2);
+const point_distance = (x1, y1, x2, y2) => {
+    let _a = (x1 - x2) ** 2,
+        _b = (y1 - y2) ** 2;
+
+    return Math.sqrt(_a + _b);
+};
 
 // collision mouse && img
-const getCollision = (mouse, img) => {
-    const Distance = App.point_distance(mouse.x, mouse.y, img.x, img.y);
+const collition_with = (mouse, img) => {
+    const Distance = point_distance(mouse.x, mouse.y, img.x, img.y);
     return Distance;
 };
 
 // img hover
-const getHoverHandle = (ele, pagePos) => {
-    const MousePos = App.Mouse(ele, pagePos);
-    const _w = window.innerWidth;
+const handle_hover = (ele, pagePos) => {
+    const Mouse = mouse(ele, pagePos);
     let _mobile = 0;
-    _w < 768 ? (_mobile = 1) : _mobile;
+    WindowWidth < 768 ? (_mobile = 1) : _mobile;
 
     ImgLists.map((ind, val) => {
-        const ImgPos = getImgPos($(val));
-        const Check = getCollision(MousePos, ImgPos);
-        const imgScale = $(val).data("img").s;
+        const ImgPos = image_position($(val));
+        const Check = collition_with(Mouse, ImgPos);
+        // const imgScale = $(val).data("img").s;
         if (Check < DefaultDistance - _mobile * 250) {
-            // RootMove(pagePos);
-            App.AbsoluteTitle(ImgTitle, MousePos);
-            RootMove(ImgPos, MousePos);
+            absolute_title(ImgTitle, Mouse);
+            root_move(ImgPos, Mouse);
             let _d2 = 1 - Check / DefaultDistance;
-            _d2 <= imgScale ? (_d2 = imgScale) : _d2;
+            _d2 <= 0.3 ? (_d2 = 0.3) : _d2;
 
             let _zindex = Math.floor(_d2 * 100);
             $(val).css({
                 transform: `scale(${_d2})`,
-                "z-index": _zindex * 10,
+                "z-index": _zindex,
             });
         } else {
             $(val).css({
@@ -104,7 +125,7 @@ const getHoverHandle = (ele, pagePos) => {
 };
 
 //reseet img
-const resetImg = () => {
+const image_reset = () => {
     ImgLists.map((ind, val) => {
         const imgScale = $(val).data("img").s;
         $(val).css({
@@ -114,7 +135,7 @@ const resetImg = () => {
 };
 
 // root move
-const RootMove = (pos, mouse) => {
+const root_move = (pos, mouse) => {
     let _rootHalf = RootWidth - WindowWidth;
 
     let _left = pos.x - WindowWidth * 0.5,
@@ -137,13 +158,21 @@ const RootMove = (pos, mouse) => {
     });
 };
 
-const handleStorage = (name) => {
+const handle_storage = (name) => {
     localStorage.clear();
     localStorage.setItem("imgName", name[name.length - 1]);
 };
 
+const get_url = (e = "") => {
+    const pathname = window.location.pathname;
+    let _pathname = pathname.split("/"),
+        _remove = _pathname.pop();
+    _pathname.push(e);
+    return _pathname.join("/");
+};
+
 // click
-const ImgClick = (e) => {
+const image_click = (e) => {
     let _pos = e.data("img");
     let _pathname = e.attr("data-nav"),
         _name = e.find("img").attr("src").split("/");
@@ -152,7 +181,7 @@ const ImgClick = (e) => {
         e.addClass("img-click");
     }, 500);
 
-    handleStorage(_name);
+    handle_storage(_name);
 
     Root.css({
         transform: "translate(-50px, -50px)",
@@ -169,7 +198,7 @@ const ImgClick = (e) => {
     });
 
     let _setUrl = setTimeout(function () {
-        window.location.pathname = _pathname;
+        window.location.pathname = get_url(_pathname);
     }, 1500);
 };
 
@@ -182,14 +211,14 @@ $(window).on("load", function () {
 
     let _time = setTimeout(function () {
         _mousemove = true;
-        imgInit();
+        img_init();
 
         ImgLists.on("mouseenter", function () {
             let _title = $(this).find(".img-title").text();
             ImgTitle.text(_title);
         }).on("click", function () {
             _click = true;
-            ImgClick($(this));
+            image_click($(this));
         });
     }, 2000);
 
@@ -198,14 +227,14 @@ $(window).on("load", function () {
             const _ = $(this);
 
             const PagePos = { x: e.pageX, y: e.pageY };
-            getHoverHandle(RootPos, PagePos);
+            handle_hover(RootPos, PagePos);
             _mousemove = false;
             let _time = setTimeout(function () {
                 _mousemove = true;
             }, 50);
         }
     }).on("mouseleave", function () {
-        if (!_click) resetImg();
+        if (!_click) image_reset();
     });
 
     Root.on("touchmove", function (e) {
@@ -217,13 +246,13 @@ $(window).on("load", function () {
                 y: e.changedTouches[0].clientY,
             };
 
-            getHoverHandle(RootPos, PagePos);
+            handle_hover(RootPos, PagePos);
             _mousemove = false;
             let _time = setTimeout(function () {
                 _mousemove = true;
             }, 100);
         }
     }).on("touchend", function () {
-        if (!_click) resetImg();
+        if (!_click) image_reset();
     });
 });

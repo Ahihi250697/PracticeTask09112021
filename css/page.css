@@ -504,14 +504,16 @@
     }
 
     .page .img img {
-        width: 100%;
-        height: auto;
+        max-width: 100%;
         max-height: 100%;
-        object-fit: cover;
     }
 }
 
 @media only screen and (max-width: 768px) {
+    .page .img img {
+        object-fit: cover;
+    }
+
     .page .img .img-title {
         font-size: 10rem;
     }
